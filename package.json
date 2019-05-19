@@ -6,12 +6,20 @@
   "author": "Sher Minn Chong <sherminn.chong@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "jest": "^24.8.0"
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "^7.11.1",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1"
   },
   "dependencies": {
     "node": "^12.2.0"
   },
   "scripts": {
-    "test" : "jest tests/"
+    "test": "jest tests/"
   }
 }
