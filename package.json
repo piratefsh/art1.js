@@ -1,0 +1,17 @@
+{
+  "name": "art1.js",
+  "version": "1.0.0",
+  "description": "JavaScript implementation of the 1960s ART 1 language",
+  "main": "src/index.js",
+  "author": "Sher Minn Chong <sherminn.chong@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^24.8.0"
+  },
+  "dependencies": {
+    "node": "^12.2.0"
+  },
+  "scripts": {
+    "test" : "jest tests/"
+  }
+}
