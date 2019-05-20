@@ -256,4 +256,44 @@ describe("line", () => {
       "....*".split("")
     ]);
   });
+
+  it("should draw random lines", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 30,
+      height: 30
+    });
+    const randInt = (start, end) =>
+      start + Math.floor(Math.random() * (end - start));
+
+    const { arr1 } = c;
+    let art = arr1;
+    // for (let i = 0; i < 10; i += 1) {
+    //   const x = randInt(0, 15);
+    //   const y = randInt(0, 15);
+    //   const nr = randInt(-x, 30 - x)
+    //   const nc = randInt(-y, 30 - y)
+    //   console.log(x, y, nr, nc)
+    //   art = line(art, {
+    //     symbol: "*=?~#".charAt(randInt(0, 4)),
+    //     r: x,
+    //     c: y,
+    //     nr,
+    //     nc
+    //   });
+    // }
+
+    art = line(art, {
+        symbol: "*=?~#".charAt(randInt(0, 4)),
+        r: 10,
+        c: 9,
+        nr: -3,
+        nc: 9
+      });
+    // eslint-disable-next-line
+    const res = stringify(art);
+    console.log(res);
+    expect(res.length).toBe(30 * 30);
+  });
 });

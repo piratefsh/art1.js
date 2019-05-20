@@ -17,6 +17,23 @@ function stringify(arr) {
   return arr.map(row => row.join("")).join("\n");
 }
 
+function copy(arr) {
+  return [...arr].map(row => [...row]);
+}
+
+function validate(arr, x, y) {
+  if (x < 0 || x > arr[0].length || y < 0 || y > arr.length) {
+    throw new Error(`line: ${x}, ${y} are not valid positions`);
+  }
+}
+
+function set(arr, x, y, sym) {
+  const carr = copy(arr);
+  validate(carr, x, y);
+  carr[y][x] = sym;
+  return carr;
+}
+
 function init({
   symbol1 = "",
   ncol = 1,
@@ -37,10 +54,6 @@ function print(canvas) {
   return `${stringify(a1)}\n\n${stringify(a2)}`;
 }
 
-function copy(arr) {
-  return [...arr].map(row => [...row]);
-}
-
 function lineLow(arr, x0, y0, x1, y1, sym) {
   let E = 0;
   let y = y0;
@@ -48,10 +61,10 @@ function lineLow(arr, x0, y0, x1, y1, sym) {
   const dy = y1 - y0;
   const dir = dy < 0 ? -1 : 1;
 
-  const rarr = copy(arr);
+  let rarr = copy(arr);
   for (let x = x0; x < x1; x += 1) {
-    rarr[y][x] = sym;
-
+    rarr = set(rarr, x, y, sym);
+    console.log(2 * (E + dy), dx * dir)
     if (2 * (E + dy) < dx * dir) {
       E += dy;
     } else {
@@ -61,7 +74,7 @@ function lineLow(arr, x0, y0, x1, y1, sym) {
   }
 
   if (y1 < arr.length && x1 < arr[0].length) {
-    rarr[y1][x1] = sym;
+    rarr = set(rarr, x1, y1, sym);
   }
   return rarr;
 }
@@ -73,11 +86,9 @@ function lineHigh(arr, x0, y0, x1, y1, sym) {
   const dy = y1 - y0;
   const dir = dx < 0 ? -1 : 1;
 
-  const rarr = copy(arr);
+  let rarr = arr;
   for (let y = y0; y < y1; y += 1) {
-    debugger
-    rarr[y][x] = sym;
-
+    rarr = set(rarr, x, y, sym);
     if (2 * (E + dx * dir) < dy) {
       E += dx;
     } else {
@@ -86,7 +97,7 @@ function lineHigh(arr, x0, y0, x1, y1, sym) {
     }
   }
   if (y1 < arr.length && x1 < arr[0].length) {
-    rarr[y1][x1] = sym;
+    rarr = set(rarr, x1, y1, sym);
   }
   return rarr;
 }
@@ -96,7 +107,7 @@ function line(arr, { symbol, r, c, nr, nc } = {}) {
   const y0 = r;
   const x1 = x0 + nc;
   const y1 = y0 + nr;
-  debugger
+
   // low slope
   if (Math.abs(nr) < Math.abs(nc)) {
     if (nc > 0) {
@@ -115,8 +126,9 @@ function line(arr, { symbol, r, c, nr, nc } = {}) {
   // negative gradient
   return lineHigh(arr, x1, y1, x0, y0, symbol);
 }
-// function ellipse(arr) {}
 
+// TODOs
+// function ellipse(arr) {}
 // function rectSolid(canvas) {}
 // function rectOpen(canvas) {}
 // function triangle(canvas) {}
