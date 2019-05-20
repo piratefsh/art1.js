@@ -1,4 +1,19 @@
-const { array, init } = require("../src/art1");
+const { array, init, line, stringify } = require("../src/art1");
+
+const setup = options =>
+  init(
+    Object.assign(
+      {
+        width: 4,
+        height: 3,
+        symbol1: "-",
+        ncol: 1,
+        symbol2: '"',
+        mcol: 1
+      },
+      options
+    )
+  );
 
 describe("array", () => {
   it("should return 2D array of length", () => {
@@ -9,20 +24,6 @@ describe("array", () => {
 });
 
 describe("init", () => {
-  const setup = options =>
-    init(
-      Object.assign(
-        {
-          width: 4,
-          height: 3,
-          symbol1: "-",
-          ncol: 1,
-          symbol2: '"',
-          mcol: 1
-        },
-        options
-      )
-    );
   it("should fill canvas", () => {
     const c = setup();
     const pattern1 = "----";
@@ -39,7 +40,7 @@ describe("init", () => {
     ]);
   });
 
-  it("should fill canvas with alternating", () => {
+  it("should fill canvas with alternating symbol", () => {
     const c = setup({ symbol1: "-", ncol: 2, symbol2: "x", mcol: 3 });
 
     const pattern1 = "- - ";
@@ -58,6 +59,201 @@ describe("init", () => {
 });
 
 describe("line", () => {
-  it("should draw vertical line", () => {});
-  it("should draw horizontal line", () => {});
+  it("should draw line that is a dot", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 3,
+      height: 3
+    });
+    const res = line(c.arr1, { symbol: "=", r: 1, c: 1, nr: 0, nc: 0 });
+    // eslint-disable-next-line
+    expect(res).toEqual([
+      "...".split(""),
+      ".=.".split(""),
+      "...".split("")
+    ]);
+  });
+
+  it("should draw short line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 3,
+      height: 3
+    });
+    const res = line(c.arr1, { symbol: "=", r: 1, c: 1, nr: 2, nc: 2 });
+
+    // eslint-disable-next-line
+    expect(res).toEqual([
+      "...".split(""),
+      ".=.".split(""),
+      "..=".split("")]);
+  });
+
+  it("should draw horizontal line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-"
+    });
+    const arr = line(c.arr1, { symbol: "=", r: 1, c: 0, nr: 0, nc: 4 });
+    // eslint-disable-next-line
+    expect(arr).toEqual([
+      "....".split(""),
+      "====".split(""),
+      "....".split("")]);
+  });
+
+  it("should draw slightly sloped line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-"
+    });
+    const arr = line(c.arr1, { symbol: "=", r: 1, c: 0, nr: 1, nc: 4 });
+    // eslint-disable-next-line
+    expect(arr).toEqual([
+      "....".split(""),
+      "==..".split(""),
+      "..==".split("")]);
+  });
+
+  it("should draw slightly sloped line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-"
+    });
+    const arr = line(c.arr1, { symbol: "=", r: 1, c: 0, nr: 2, nc: 2 });
+    // eslint-disable-next-line
+    expect(arr).toEqual([
+      "....".split(""),
+      "=...".split(""),
+      ".=..".split("")]);
+  });
+
+  it("should draw vertical line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-"
+    });
+    const arr = line(c.arr1, { symbol: "|", r: 0, c: 1, nr: 3, nc: 0 });
+
+    // eslint-disable-next-line
+    expect(arr).toEqual([
+      ".|..".split(""),
+      ".|..".split(""),
+      ".|..".split("")
+    ]);
+  });
+
+  it("should draw negative sloped line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-"
+    });
+    const arr = line(c.arr1, { symbol: "=", r: 2, c: 2, nr: -2, nc: -2 });
+    // eslint-disable-next-line
+    expect(arr).toEqual([
+      "=...".split(""),
+      ".=..".split(""),
+      "..=.".split("")
+    ]);
+  });
+
+  it("should draw steep sloped line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 5,
+      height: 5
+    });
+    const arr = line(c.arr1, { symbol: "=", r: 0, c: 0, nr: 5, nc: 3 });
+    // eslint-disable-next-line
+    expect(arr).toEqual([
+      "=....".split(""),
+      ".=...".split(""),
+      ".=...".split(""),
+      "..=..".split(""),
+      "..=..".split("")
+    ]);
+  });
+
+  it("should draw steep positively sloped line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 5,
+      height: 5
+    });
+    const arr = line(c.arr1, { symbol: "=", r: 4, c: 3, nr: -4, nc: -3 });
+    // eslint-disable-next-line
+    expect(arr).toEqual([
+      "=....".split(""),
+      ".=...".split(""),
+      "..=..".split(""),
+      "..=..".split(""),
+      "...=.".split("")
+    ]);
+  });
+
+  it("should draw steep negatively sloped line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 5,
+      height: 5
+    });
+    const arr = line(c.arr1, { symbol: "/", r: 4, c: 1, nr: -4, nc: 2 });
+    // eslint-disable-next-line
+    expect(arr).toEqual([
+      ".../.".split(""),
+      "../..".split(""),
+      "../..".split(""),
+      "../..".split(""),
+      "./...".split("")
+    ]);
+  });
+
+  it("should draw edge cases", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 5,
+      height: 5
+    });
+    const left = line(c.arr1, { symbol: "*", r: 0, c: 0, nr: 4, nc: 0 });
+    // eslint-disable-next-line
+    expect(left).toEqual([
+      "*....".split(""),
+      "*....".split(""),
+      "*....".split(""),
+      "*....".split(""),
+      "*....".split("")
+    ]);
+
+    const top = line(c.arr1, { symbol: "*", r: 0, c: 0, nr: 0, nc: 4 });
+    expect(top).toEqual([
+      "*****".split(""),
+      ".....".split(""),
+      ".....".split(""),
+      ".....".split(""),
+      ".....".split("")
+    ]);
+
+    const bottom = line(c.arr1, { symbol: "*", r: 4, c: 0, nr: 0, nc: 4 });
+    expect(bottom).toEqual([
+      ".....".split(""),
+      ".....".split(""),
+      ".....".split(""),
+      ".....".split(""),
+      "*****".split("")
+    ]);
+    const right = line(c.arr1, { symbol: "*", r: 0, c: 4, nr: 4, nc: 0 });
+    expect(right).toEqual([
+      "....*".split(""),
+      "....*".split(""),
+      "....*".split(""),
+      "....*".split(""),
+      "....*".split("")
+    ]);
+  });
 });
