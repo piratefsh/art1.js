@@ -64,8 +64,7 @@ function lineLow(arr, x0, y0, x1, y1, sym) {
   let rarr = copy(arr);
   for (let x = x0; x < x1; x += 1) {
     rarr = set(rarr, x, y, sym);
-    console.log(2 * (E + dy), dx * dir)
-    if (2 * (E + dy) < dx * dir) {
+    if (2 * (E + dy) * dir < dx) {
       E += dy;
     } else {
       y += dir;
@@ -89,7 +88,7 @@ function lineHigh(arr, x0, y0, x1, y1, sym) {
   let rarr = arr;
   for (let y = y0; y < y1; y += 1) {
     rarr = set(rarr, x, y, sym);
-    if (2 * (E + dx * dir) < dy) {
+    if (2 * (E + dx) < dy * dir) {
       E += dx;
     } else {
       x += dir;

@@ -257,6 +257,27 @@ describe("line", () => {
     ]);
   });
 
+  it("should draw negative slope steep line", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 15,
+      height: 4
+    });
+    const art = line(c.arr1, {
+      symbol: "*",
+      r: 3,
+      c: 2,
+      nr: -3,
+      nc: 9
+    });
+    const res = stringify(art);
+    expect(res).toEqual(`..........**...
+.......***.....
+....***........
+..**...........`);
+  });
+
   it("should draw random lines", () => {
     const c = setup({
       symbol1: ".",
@@ -269,31 +290,20 @@ describe("line", () => {
 
     const { arr1 } = c;
     let art = arr1;
-    // for (let i = 0; i < 10; i += 1) {
-    //   const x = randInt(0, 15);
-    //   const y = randInt(0, 15);
-    //   const nr = randInt(-x, 30 - x)
-    //   const nc = randInt(-y, 30 - y)
-    //   console.log(x, y, nr, nc)
-    //   art = line(art, {
-    //     symbol: "*=?~#".charAt(randInt(0, 4)),
-    //     r: x,
-    //     c: y,
-    //     nr,
-    //     nc
-    //   });
-    // }
-
-    art = line(art, {
+    for (let i = 0; i < 10; i += 1) {
+      const x = randInt(0, 15);
+      const y = randInt(0, 15);
+      const nr = randInt(-x, 30 - x);
+      const nc = randInt(-y, 30 - y);
+      art = line(art, {
         symbol: "*=?~#".charAt(randInt(0, 4)),
-        r: 10,
-        c: 9,
-        nr: -3,
-        nc: 9
+        r: x,
+        c: y,
+        nr,
+        nc
       });
-    // eslint-disable-next-line
-    const res = stringify(art);
-    console.log(res);
-    expect(res.length).toBe(30 * 30);
+    }
+
+    expect(stringify(art).length).toBe(30 * 30 + 29);
   });
 });
