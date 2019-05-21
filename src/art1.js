@@ -88,11 +88,11 @@ function lineHigh(arr, x0, y0, x1, y1, sym) {
   let rarr = arr;
   for (let y = y0; y < y1; y += 1) {
     rarr = set(rarr, x, y, sym);
-    if (2 * (E + dx) < dy * dir) {
+    if (2 * (E + dx) * dir < dy) {
       E += dx;
     } else {
       x += dir;
-      E = E + dir * dx - dy;
+      E = E + dx - dir * dy;
     }
   }
   if (y1 < arr.length && x1 < arr[0].length) {

@@ -1,4 +1,5 @@
 const { array, init, line, stringify } = require("../src/art1");
+const { randInt } = require("../src/random");
 
 const setup = options =>
   init(
@@ -208,7 +209,7 @@ describe("line", () => {
       ".../.".split(""),
       "../..".split(""),
       "../..".split(""),
-      "../..".split(""),
+      "./...".split(""),
       "./...".split("")
     ]);
   });
@@ -271,11 +272,61 @@ describe("line", () => {
       nr: -3,
       nc: 9
     });
-    const res = stringify(art);
-    expect(res).toEqual(`..........**...
-.......***.....
-....***........
-..**...........`);
+    expect(art).toEqual([
+      "..........**...".split(""),
+      ".......***.....".split(""),
+      "....***........".split(""),
+      "..**...........".split("")
+    ]);
+  });
+
+  it("should draw lines in all octanes", () => {
+    const width = 17;
+    const height = 17;
+    const options = {
+      symbol1: ".",
+      symbol2: "-",
+      width,
+      height
+    };
+
+    const c = setup(options);
+
+    const r = width / 2;
+    let art = c.arr1;
+    for (let t = 0; t < Math.PI * 2; t += Math.PI / 6) {
+      const x = Math.trunc(r * Math.sin(t));
+      const y = Math.trunc(r * Math.cos(t));
+      art = line(art, {
+        r: Math.trunc(width / 2),
+        c: Math.trunc(height / 2),
+        nr: y,
+        nc: x,
+        symbol: "*"
+      });
+    }
+
+    expect(art).toEqual(
+      `........*........
+....*...*...*....
+.....*..*..*.....
+.....*..*..*.....
+.*....*.*.*....*.
+..**..*.*.*..**..
+....**.***.**....
+......*****......
+*****************
+......*****......
+....**.***.**....
+..**..*.*.*..**..
+.*....*.*.*....*.
+.....*..*..*.....
+.....*..*..*.....
+....*...*...*....
+........*........`
+        .split("\n")
+        .map(ln => ln.split(""))
+    );
   });
 
   it("should draw random lines", () => {
@@ -285,8 +336,6 @@ describe("line", () => {
       width: 30,
       height: 30
     });
-    const randInt = (start, end) =>
-      start + Math.floor(Math.random() * (end - start));
 
     const { arr1 } = c;
     let art = arr1;
