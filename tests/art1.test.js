@@ -1,4 +1,4 @@
-const { array, init, line, stringify } = require("../src/art1");
+const { array, init, line, stringify, rectSolid, rectOpen } = require("../src/art1");
 const { randInt } = require("../src/random");
 
 const setup = options =>
@@ -354,5 +354,89 @@ describe("line", () => {
     }
 
     expect(stringify(art).length).toBe(30 * 30 + 29);
+  });
+
+  it("should draw solid rectangle", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 5,
+      height: 5
+    });
+
+    const { arr1 } = c;
+    const art = rectSolid(arr1, { symbol: "*", r: 1, c: 1, nr: 3, nc: 3 });
+    expect(art).toEqual(
+      `.....
+.***.
+.***.
+.***.
+.....`
+        .split("\n")
+        .map(ln => ln.split(""))
+    );
+  });
+
+  it("should draw small rectangles", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 5,
+      height: 5
+    });
+
+    const { arr1 } = c;
+    const art = rectSolid(arr1, { symbol: "*", r: 1, c: 2, nr: 3, nc: 1 });
+    expect(art).toEqual(
+      `.....
+..*..
+..*..
+..*..
+.....`
+        .split("\n")
+        .map(ln => ln.split(""))
+    );
+  });
+
+  it("should draw tiny rectangles", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 5,
+      height: 5
+    });
+
+    const { arr1 } = c;
+    const art = rectSolid(arr1, { symbol: "*", r: 2, c: 2, nr: 1, nc: 1 });
+    expect(art).toEqual(
+      `.....
+.....
+..*..
+.....
+.....`
+        .split("\n")
+        .map(ln => ln.split(""))
+    );
+  });
+
+  it("should draw open rectangle", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 5,
+      height: 5
+    });
+
+    const { arr1 } = c;
+    const art = rectOpen(arr1, { symbol: "*", r: 1, c: 1, nr: 3, nc: 4 });
+    expect(art).toEqual(
+      `.....
+.****
+.*..*
+.****
+.....`
+        .split("\n")
+        .map(ln => ln.split(""))
+    );
   });
 });

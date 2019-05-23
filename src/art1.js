@@ -126,10 +126,24 @@ function line(arr, { symbol, r, c, nr, nc } = {}) {
   return lineHigh(arr, x1, y1, x0, y0, symbol);
 }
 
+function rectSolid(arr, { symbol, r, c, nr, nc }) {
+  let rarr = copy(arr);
+  for (let i = 0; i < nr; i += 1) {
+    rarr = line(rarr, { symbol, r: r + i, c, nr: 0, nc: nc - 1 });
+  }
+  return rarr;
+}
+
+function rectOpen(arr, { symbol, r, c, nr, nc }) {
+  let rarr = copy(arr);
+  rarr = line(rarr, { symbol, r, c, nr: 0, nc: nc - 1 });
+  rarr = line(rarr, { symbol, r: r + nr - 1, c, nr: 0, nc: nc - 1 });
+  rarr = line(rarr, { symbol, r, c, nr: nr - 1, nc: 0 });
+  rarr = line(rarr, { symbol, r, c: c + nc - 1, nr: nr - 1, nc: 0 });
+  return rarr;
+}
 // TODOs
 // function ellipse(arr) {}
-// function rectSolid(canvas) {}
-// function rectOpen(canvas) {}
 // function triangle(canvas) {}
 // function quadrants(canvas) {}
 // function exponential(canvas) {}
@@ -138,7 +152,9 @@ module.exports = {
   Art1,
   array,
   init,
-  line,
   print,
-  stringify
+  stringify,
+  line,
+  rectSolid,
+  rectOpen
 };
