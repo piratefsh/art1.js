@@ -1,38 +1,6 @@
+const { fill, array, copy, set, setx } = require('./helpers');
 const CANVAS_WIDTH = 105;
 const CANVAS_HEIGHT = 50;
-
-function Art1() {
-  return true;
-}
-
-function array(w = CANVAS_WIDTH, h = CANVAS_HEIGHT) {
-  return new Array(h).fill(null).map(() => new Array(w).fill(null));
-}
-
-function fill(arr, symbol, ncol) {
-  return arr.map(row => row.map((char, j) => (j % ncol === 0 ? symbol : " ")));
-}
-
-function stringify(arr) {
-  return arr.map(row => row.join("")).join("\n");
-}
-
-function copy(arr) {
-  return [...arr].map(row => [...row]);
-}
-
-function validate(arr, x, y) {
-  if (x < 0 || x > arr[0].length || y < 0 || y > arr.length) {
-    throw new Error(`line: ${x}, ${y} are not valid positions`);
-  }
-}
-
-function set(arr, x, y, sym) {
-  const carr = copy(arr);
-  validate(carr, x, y);
-  carr[y][x] = sym;
-  return carr;
-}
 
 function init({
   symbol1 = "",
@@ -47,11 +15,6 @@ function init({
   const arr2 = fill(array(width, height), symbol2, mcol);
 
   return { arr1, arr2, title };
-}
-
-function print(canvas) {
-  const { a1, a2 } = canvas;
-  return `${stringify(a1)}\n\n${stringify(a2)}`;
 }
 
 function lineLow(arr, x0, y0, x1, y1, sym) {
@@ -126,7 +89,7 @@ function line(arr, { symbol, r, c, nr, nc } = {}) {
   return lineHigh(arr, x1, y1, x0, y0, symbol);
 }
 
-function rectSolid(arr, { symbol, r, c, nr, nc }) {
+function rectSolid(arr, { symbol, r, c, nr = 1, nc = 1 }) {
   let rarr = copy(arr);
   for (let i = 0; i < nr; i += 1) {
     rarr = line(rarr, { symbol, r: r + i, c, nr: 0, nc: nc - 1 });
@@ -134,7 +97,7 @@ function rectSolid(arr, { symbol, r, c, nr, nc }) {
   return rarr;
 }
 
-function rectOpen(arr, { symbol, r, c, nr, nc }) {
+function rectOpen(arr, { symbol, r, c, nr = 1, nc = 1 }) {
   let rarr = copy(arr);
   rarr = line(rarr, { symbol, r, c, nr: 0, nc: nc - 1 });
   rarr = line(rarr, { symbol, r: r + nr - 1, c, nr: 0, nc: nc - 1 });
@@ -143,18 +106,30 @@ function rectOpen(arr, { symbol, r, c, nr, nc }) {
   return rarr;
 }
 // TODOs
-// function ellipse(arr) {}
+function ellipse(arr, { symbol, r, c, nr, nc }) {
+  const rarr = copy(arr);
+  // for (let t = 0; t < Math.PI * 2; t += Math.PI / 10) {
+  //   const x = c + Math.round(nc * Math.sin(t));
+  //   const y = r + Math.round(nr * Math.cos(t));
+  //   setx(rarr, x, y, symbol);
+  // }
+
+  for(let i = 0; i < nr; i++){
+    for(let i = 0; i < nr; i++){
+
+    }
+  }
+  return rarr;
+}
 // function triangle(canvas) {}
 // function quadrants(canvas) {}
 // function exponential(canvas) {}
 
 module.exports = {
-  Art1,
   array,
   init,
-  print,
-  stringify,
   line,
   rectSolid,
-  rectOpen
+  rectOpen,
+  ellipse
 };

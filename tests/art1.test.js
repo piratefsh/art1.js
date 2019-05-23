@@ -1,4 +1,5 @@
-const { array, init, line, stringify, rectSolid, rectOpen } = require("../src/art1");
+const { init, line, rectSolid, rectOpen, ellipse } = require("../src/art1");
+const { array, stringify } = require("../src/helpers");
 const { randInt } = require("../src/random");
 
 const setup = options =>
@@ -438,5 +439,27 @@ describe("line", () => {
         .split("\n")
         .map(ln => ln.split(""))
     );
+  });
+
+  it("should draw ellipse", () => {
+    const c = setup({
+      symbol1: ".",
+      symbol2: "-",
+      width: 12,
+      height: 8
+    });
+
+    const { arr1 } = c;
+    const art = ellipse(arr1, { symbol: "*", r: 4, c: 4, nr: 3, nc: 4 });
+    console.log(stringify(art))
+//     expect(art).toEqual(
+//       `.....
+// .****
+// .*..*
+// .****
+// .....`
+//         .split("\n")
+//         .map(ln => ln.split(""))
+//     );
   });
 });
