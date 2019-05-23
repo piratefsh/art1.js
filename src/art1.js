@@ -1,4 +1,5 @@
-const { fill, array, copy, set, setx } = require('./helpers');
+const { fill, array, copy, set, setx } = require("./helpers");
+
 const CANVAS_WIDTH = 105;
 const CANVAS_HEIGHT = 50;
 
@@ -105,22 +106,25 @@ function rectOpen(arr, { symbol, r, c, nr = 1, nc = 1 }) {
   rarr = line(rarr, { symbol, r, c: c + nc - 1, nr: nr - 1, nc: 0 });
   return rarr;
 }
-// TODOs
 function ellipse(arr, { symbol, r, c, nr, nc }) {
   const rarr = copy(arr);
-  // for (let t = 0; t < Math.PI * 2; t += Math.PI / 10) {
-  //   const x = c + Math.round(nc * Math.sin(t));
-  //   const y = r + Math.round(nr * Math.cos(t));
-  //   setx(rarr, x, y, symbol);
-  // }
 
-  for(let i = 0; i < nr; i++){
-    for(let i = 0; i < nr; i++){
-
+  for (let y = r - nr; y <= r + nr; y += 1) {
+    for (let x = c - nc; x <= c + nc; x += 1) {
+      // if point is in ellipse
+      const dx = (x - c) * (x - c);
+      const dy = (y - r) * (y - r);
+      const ry2 = nr * nr;
+      const rx2 = nc * nc;
+      if (dx * rx2 + dy * ry2 <= ry2 * rx2) {
+        setx(rarr, x, y, symbol);
+      }
     }
   }
   return rarr;
 }
+
+// TODOs
 // function triangle(canvas) {}
 // function quadrants(canvas) {}
 // function exponential(canvas) {}
