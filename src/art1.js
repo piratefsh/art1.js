@@ -116,6 +116,8 @@ function ellipse(arr, { symbol, r, c, nr, nc }) {
       const dy = (y - r) * (y - r);
       const ry2 = nr * nr;
       const rx2 = nc * nc;
+
+      // do integer math comparison
       if (dx * rx2 + dy * ry2 <= ry2 * rx2) {
         setx(rarr, x, y, symbol);
       }
