@@ -1,22 +1,5 @@
-const { fill, array, copy, set, setx } = require("./helpers");
-
-const CANVAS_WIDTH = 105;
-const CANVAS_HEIGHT = 50;
-
-function init({
-  symbol1 = "",
-  ncol = 1,
-  symbol2 = "",
-  mcol = 1,
-  title,
-  width = CANVAS_WIDTH,
-  height = CANVAS_HEIGHT
-}) {
-  const arr1 = fill(array(width, height), symbol1, ncol);
-  const arr2 = fill(array(width, height), symbol2, mcol);
-
-  return { arr1, arr2, title };
-}
+const { array, copy, set, setx, get } = require("./helpers");
+const init = require("./init");
 
 function lineLow(arr, x0, y0, x1, y1, sym) {
   let E = 0;
@@ -91,6 +74,10 @@ function line(arr, { symbol, r, c, nr, nc } = {}) {
 }
 
 function rectSolid(arr, { symbol, r, c, nr = 1, nc = 1 }) {
+  if (nr == 0 || nc == 0) {
+    return arr;
+  }
+
   let rarr = copy(arr);
   for (let i = 0; i < nr; i += 1) {
     rarr = line(rarr, { symbol, r: r + i, c, nr: 0, nc: nc - 1 });
@@ -99,6 +86,10 @@ function rectSolid(arr, { symbol, r, c, nr = 1, nc = 1 }) {
 }
 
 function rectOpen(arr, { symbol, r, c, nr = 1, nc = 1 }) {
+  if (nr == 0 || nc == 0) {
+    return arr;
+  }
+
   let rarr = copy(arr);
   rarr = line(rarr, { symbol, r, c, nr: 0, nc: nc - 1 });
   rarr = line(rarr, { symbol, r: r + nr - 1, c, nr: 0, nc: nc - 1 });
@@ -126,9 +117,21 @@ function ellipse(arr, { symbol, r, c, nr, nc }) {
   return rarr;
 }
 
+function quadrants(arr) {
+  const width = arr[0].length;
+  const height = arr.length;
+  for (let y = 0; y < arr.length / 2; y += 1) {
+    for (let x = 0; x < arr[y].length / 2; x += 1) {
+      setx(arr, x, y, get(arr, x, y));
+      setx(arr, width - x - 1, y, get(arr, x, y));
+      setx(arr, x, height - y - 1, get(arr, x, y));
+      setx(arr, width - x - 1, height - y - 1, get(arr, x, y));
+    }
+  }
+  return arr;
+}
 // TODOs
 // function triangle(canvas) {}
-// function quadrants(canvas) {}
 // function exponential(canvas) {}
 
 module.exports = {
@@ -137,5 +140,6 @@ module.exports = {
   line,
   rectSolid,
   rectOpen,
-  ellipse
+  ellipse,
+  quadrants
 };

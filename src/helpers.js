@@ -27,6 +27,10 @@ function set(arr, x, y, sym) {
   return carr;
 }
 
+function get(arr, x, y) {
+  return arr[y][x];
+}
+
 function setx(arr, x, y, sym) {
   validate(arr, x, y);
   arr[y][x] = sym;
@@ -43,6 +47,7 @@ module.exports = {
   print,
   stringify,
   fill,
+  get,
   set,
   setx,
   copy
