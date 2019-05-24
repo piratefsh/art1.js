@@ -1,4 +1,4 @@
-const { rectSolid, ellipse, quadrants } = require("../src/art1");
+const { rect, ellipse, quadrants } = require("../src/art1");
 
 const setup = require("./util");
 
@@ -33,7 +33,7 @@ describe("quadrants", () => {
     });
 
     const art = quadrants(
-      rectSolid(c.arr1, { symbol: "*", r: 0, c: 0, nr: 2, nc: 1 })
+      rect(c.arr1, { symbol: "*", r: 0, c: 0, nr: 2, nc: 1 })
     );
     expect(art).toEqual(
       `*..*

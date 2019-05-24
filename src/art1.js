@@ -97,6 +97,15 @@ function rectOpen(arr, { symbol, r, c, nr = 1, nc = 1 }) {
   rarr = line(rarr, { symbol, r, c: c + nc - 1, nr: nr - 1, nc: 0 });
   return rarr;
 }
+
+function rect(arr, options, open = false) {
+  if (open) {
+    return rectOpen(arr, options);
+  }
+
+  return rectSolid(arr, options);
+}
+
 function ellipse(arr, { symbol, r, c, nr, nc }) {
   const rarr = copy(arr);
 
@@ -138,8 +147,7 @@ module.exports = {
   array,
   init,
   line,
-  rectSolid,
-  rectOpen,
+  rect,
   ellipse,
   quadrants
 };

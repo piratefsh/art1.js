@@ -1,4 +1,4 @@
-const { rectSolid, rectOpen } = require("../src/art1");
+const { rect } = require("../src/art1");
 const setup = require("./util");
 
 describe("rectSolid", () => {
@@ -11,7 +11,7 @@ describe("rectSolid", () => {
     });
 
     const { arr1 } = c;
-    const art = rectSolid(arr1, { symbol: "*", r: 1, c: 1, nr: 3, nc: 3 });
+    const art = rect(arr1, { symbol: "*", r: 1, c: 1, nr: 3, nc: 3 });
     expect(art).toEqual(
       `.....
 .***.
@@ -36,12 +36,12 @@ describe("rectSolid", () => {
       .split("\n")
       .map(ln => ln.split(""));
 
-    let art = rectSolid(c.arr1, { symbol: "*", r: 0, c: 0, nr: 0, nc: 0 });
+    let art = rect(c.arr1, { symbol: "*", r: 0, c: 0, nr: 0, nc: 0 });
     expect(art).toEqual(expected);
 
-    art = rectSolid(c.arr1, { symbol: "*", r: 0, c: 0, nr: 1, nc: 0 });
+    art = rect(c.arr1, { symbol: "*", r: 0, c: 0, nr: 1, nc: 0 });
     expect(art).toEqual(expected);
-    art = rectSolid(c.arr1, { symbol: "*", r: 0, c: 0, nr: 0, nc: 1 });
+    art = rect(c.arr1, { symbol: "*", r: 0, c: 0, nr: 0, nc: 1 });
     expect(art).toEqual(expected);
   });
   it("should draw small rectangles", () => {
@@ -53,7 +53,7 @@ describe("rectSolid", () => {
     });
 
     const { arr1 } = c;
-    const art = rectSolid(arr1, { symbol: "*", r: 1, c: 2, nr: 3, nc: 1 });
+    const art = rect(arr1, { symbol: "*", r: 1, c: 2, nr: 3, nc: 1 });
     expect(art).toEqual(
       `.....
 ..*..
@@ -74,7 +74,7 @@ describe("rectSolid", () => {
     });
 
     const { arr1 } = c;
-    const art = rectSolid(arr1, { symbol: "*", r: 2, c: 2, nr: 1, nc: 1 });
+    const art = rect(arr1, { symbol: "*", r: 2, c: 2, nr: 1, nc: 1 });
     expect(art).toEqual(
       `.....
 .....
@@ -97,7 +97,7 @@ describe("rectOpen", () => {
     });
 
     const { arr1 } = c;
-    const art = rectOpen(arr1, { symbol: "*", r: 1, c: 1, nr: 3, nc: 4 });
+    const art = rect(arr1, { symbol: "*", r: 1, c: 1, nr: 3, nc: 4 }, true);
     expect(art).toEqual(
       `.....
 .****
