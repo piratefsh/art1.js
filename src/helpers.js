@@ -1,3 +1,5 @@
+const { CANVAS_WIDTH, CANVAS_HEIGHT } = require("./constants");
+
 function array(w = CANVAS_WIDTH, h = CANVAS_HEIGHT) {
   return new Array(h).fill(null).map(() => new Array(w).fill(null));
 }
@@ -33,6 +35,7 @@ function get(arr, x, y) {
 
 function setx(arr, x, y, sym) {
   validate(arr, x, y);
+  // eslint-disable-next-line no-param-reassign
   arr[y][x] = sym;
   return arr;
 }

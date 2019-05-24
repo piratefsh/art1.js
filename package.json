@@ -20,6 +20,7 @@
     "node": "^12.2.0"
   },
   "scripts": {
-    "test": "jest tests/"
+    "test": "jest tests/",
+    "lint": "eslint tests/ src/"
   }
 }

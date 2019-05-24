@@ -74,7 +74,7 @@ function line(arr, { symbol, r, c, nr, nc } = {}) {
 }
 
 function rectSolid(arr, { symbol, r, c, nr = 1, nc = 1 }) {
-  if (nr == 0 || nc == 0) {
+  if (nr === 0 || nc === 0) {
     return arr;
   }
 
@@ -86,7 +86,7 @@ function rectSolid(arr, { symbol, r, c, nr = 1, nc = 1 }) {
 }
 
 function rectOpen(arr, { symbol, r, c, nr = 1, nc = 1 }) {
-  if (nr == 0 || nc == 0) {
+  if (nr === 0 || nc === 0) {
     return arr;
   }
 
