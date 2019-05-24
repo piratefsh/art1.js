@@ -1,4 +1,4 @@
-R#art1.js
+# art1.js
 
 JavaScript implementation of the ART 1 language from the 1960s
 
