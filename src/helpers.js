@@ -17,7 +17,7 @@ function copy(arr) {
 }
 
 function validate(arr, x, y) {
-  if (x < 0 || x > arr[0].length || y < 0 || y > arr.length) {
+  if (x < 0 || x >= arr[0].length || y < 0 || y >= arr.length) {
     throw new Error(`line: ${x}, ${y} are not valid positions`);
   }
 }

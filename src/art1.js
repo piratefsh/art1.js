@@ -140,7 +140,47 @@ function quadrants(arr) {
   return arr;
 }
 // TODOs
-// function triangle(canvas) {}
+function triangle(arr, { r, c, nr, nc, symbol }) {
+  if (nr) {
+    if (nr > 0) {
+      for (let i = 0; i < nr + 1; i += 1) {
+        for (let j = -i + 1; j < i; j += 1) {
+          const x = c + j;
+          const y = r + i;
+          setx(arr, x, y, symbol);
+        }
+      }
+    } else {
+      for (let i = 0; i < -nr + 1; i += 1) {
+        for (let j = -i + 1; j < i; j += 1) {
+          const x = c + j;
+          const y = r - i + 1;
+          setx(arr, x, y, symbol);
+        }
+      }
+    }
+  } else if (nc) {
+    if (nc > 0) {
+      for (let i = 0; i < nc + 1; i += 1) {
+        for (let j = -i + 1; j < i; j += 1) {
+          const x = c + i - 1;
+          const y = r + j;
+          setx(arr, x, y, symbol);
+        }
+      }
+    }
+
+    for (let i = 0; i < -nc + 1; i += 1) {
+      for (let j = -i + 1; j < i; j += 1) {
+        const x = c - i + 1;
+        const y = r + j;
+        setx(arr, x, y, symbol);
+      }
+    }
+  }
+
+  return arr;
+}
 // function exponential(canvas) {}
 
 module.exports = {
@@ -149,5 +189,6 @@ module.exports = {
   line,
   rect,
   ellipse,
-  quadrants
+  quadrants,
+  triangle
 };
