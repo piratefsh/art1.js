@@ -1,6 +1,6 @@
 const print = require("../src/print");
 const setup = require("./util");
-const { ellipse } = require("../src/art1");
+const { ellipse, triangle } = require("../src/art1");
 
 describe("print", () => {
   xit("should draw overlapping diatricitical marks", () => {
@@ -16,6 +16,27 @@ describe("print", () => {
 XͣXͣXͣXͣ
 XͣXͣXͣXͣ
 XͣXͣXͣXͣ`
+    );
+  });
+
+  it("should draw overlapping diatricitical marks", () => {
+    const c = setup({
+      symbol1: "_",
+      symbol2: " ",
+      width: 5,
+      height: 5
+    });
+
+    c.arr2 = triangle(c.arr2, { r: 0, c: 2, nr: 3, symbol: "\u20e4 " });
+    c.arr1 = triangle(c.arr1, { r: 0, c: 2, nr: 3, symbol: "|" });
+    // c.arr1 = ellipse(c.arr1, { r: 2, c: 2, nr: 2, nc: 2, symbol: "_" });
+
+    expect(print(c)).toEqual(
+      `_ _ _ _ _ 
+_ _ |⃤ _ _ 
+_ |⃤ |⃤ |⃤ _ 
+|⃤ |⃤ |⃤ |⃤ |⃤ 
+_ _ _ _ _ `
     );
   });
 
