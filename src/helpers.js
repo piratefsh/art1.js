@@ -16,27 +16,35 @@ function copy(arr) {
   return [...arr].map(row => [...row]);
 }
 
-function validate(arr, x, y) {
+function validate(arr, x, y, err = false) {
   if (x < 0 || x >= arr[0].length || y < 0 || y >= arr.length) {
-    throw new Error(`line: ${x}, ${y} are not valid positions`);
+    if (err) {
+      throw new Error(`line: ${x}, ${y} are not valid positions`);
+    }
+
+    return false;
   }
+
+  return true;
 }
 
 function set(arr, x, y, sym) {
   const carr = copy(arr);
-  validate(carr, x, y);
-  carr[y][x] = sym;
+  if (validate(carr, x, y)) {
+    carr[Math.round(y)][Math.round(x)] = sym;
+  }
   return carr;
 }
 
 function get(arr, x, y) {
-  return arr[y][x];
+  return arr[Math.round(y)][Math.round(x)];
 }
 
 function setx(arr, x, y, sym) {
-  validate(arr, x, y);
-  // eslint-disable-next-line no-param-reassign
-  arr[y][x] = sym;
+  if (validate(arr, x, y)) {
+    // eslint-disable-next-line no-param-reassign
+    arr[Math.round(y)][Math.round(x)] = sym;
+  }
   return arr;
 }
 

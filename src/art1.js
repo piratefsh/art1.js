@@ -1,5 +1,6 @@
 const { array, copy, set, setx, get } = require("./helpers");
 const init = require("./init");
+const print = require("./print");
 
 function lineLow(arr, x0, y0, x1, y1, sym) {
   let E = 0;
@@ -190,5 +191,7 @@ module.exports = {
   rect,
   ellipse,
   quadrants,
-  triangle
+  triangle,
+  init,
+  print
 };
