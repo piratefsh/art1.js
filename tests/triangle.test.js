@@ -1,5 +1,4 @@
 const { triangle } = require("../src/art1");
-const { stringify } = require("../src/helpers");
 const setup = require("./util");
 
 describe("triangle", () => {

@@ -40,14 +40,8 @@ function setx(arr, x, y, sym) {
   return arr;
 }
 
-function print(canvas) {
-  const { a1, a2 } = canvas;
-  return `${stringify(a1)}\n\n${stringify(a2)}`;
-}
-
 module.exports = {
   array,
-  print,
   stringify,
   fill,
   get,
