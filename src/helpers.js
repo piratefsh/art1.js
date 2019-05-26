@@ -16,7 +16,9 @@ function copy(arr) {
   return [...arr].map(row => [...row]);
 }
 
-function validate(arr, x, y, err = false) {
+function validate(arr, rx, ry, err = false) {
+  const x = Math.round(rx);
+  const y = Math.round(ry);
   if (x < 0 || x >= arr[0].length || y < 0 || y >= arr.length) {
     if (err) {
       throw new Error(`line: ${x}, ${y} are not valid positions`);
@@ -25,25 +27,36 @@ function validate(arr, x, y, err = false) {
     return false;
   }
 
-  return true;
+  return { x, y };
 }
 
-function set(arr, x, y, sym) {
+function set(arr, rx, ry, sym) {
   const carr = copy(arr);
-  if (validate(carr, x, y)) {
-    carr[Math.round(y)][Math.round(x)] = sym;
+  const cleanCoords = validate(carr, rx, ry);
+  if (cleanCoords) {
+    const { x, y } = cleanCoords;
+    carr[y][x] = sym;
   }
   return carr;
 }
 
-function get(arr, x, y) {
-  return arr[Math.round(y)][Math.round(x)];
+function get(arr, rx, ry) {
+  const carr = copy(arr);
+  const cleanCoords = validate(carr, rx, ry);
+  if (cleanCoords) {
+    const { x, y } = cleanCoords;
+    return arr[y][x];
+  }
+
+  return "";
 }
 
-function setx(arr, x, y, sym) {
-  if (validate(arr, x, y)) {
+function setx(arr, rx, ry, sym) {
+  const cleanCoords = validate(arr, rx, ry);
+  if (cleanCoords) {
+    const { x, y } = cleanCoords;
     // eslint-disable-next-line no-param-reassign
-    arr[Math.round(y)][Math.round(x)] = sym;
+    arr[y][x] = sym;
   }
   return arr;
 }
