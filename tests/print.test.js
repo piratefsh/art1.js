@@ -1,9 +1,9 @@
 const print = require("../src/print");
 const setup = require("./util");
-const { ellipse, triangle } = require("../src/art1");
+const { ellipse, triangle, rect } = require("../src/art1");
 
 describe("print", () => {
-  xit("should draw overlapping diatricitical marks", () => {
+  it("should draw overlapping diatricitical marks", () => {
     const c = setup({
       symbol1: "X",
       symbol2: "\u0363",
@@ -16,6 +16,24 @@ describe("print", () => {
 XͣXͣXͣXͣ
 XͣXͣXͣXͣ
 XͣXͣXͣXͣ`
+    );
+  });
+
+  it("should draw composite emoji marks", () => {
+    const c = setup({
+      symbol1: "",
+      symbol2: "",
+      width: 3,
+      height: 3
+    });
+
+    c.arr1 = rect(c.arr1, { r: 0, c: 0, nr: 3, nc: 3, symbol: "👩" });
+    c.arr2 = rect(c.arr2, { r: 0, c: 0, nr: 3, nc: 3, symbol: "👩" });
+
+    expect(print(c, "\u200D❤️\u200D")).toEqual(
+      `👩‍❤️‍👩👩‍❤️‍👩👩‍❤️‍👩
+👩‍❤️‍👩👩‍❤️‍👩👩‍❤️‍👩
+👩‍❤️‍👩👩‍❤️‍👩👩‍❤️‍👩`
     );
   });
 
