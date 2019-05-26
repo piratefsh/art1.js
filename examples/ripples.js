@@ -1,8 +1,8 @@
 const { init, ellipse, print } = require("../src/art1");
 
 (function main() {
-  const width = 101;
-  const height = 101;
+  const width = 51;
+  const height = 51;
   const c = init({
     width,
     height,
@@ -12,8 +12,8 @@ const { init, ellipse, print } = require("../src/art1");
     mcol: 1
   });
 
-  const gx = 8;
-  const gy = 8;
+  const gx = 4;
+  const gy = 4;
   const cy = height / gy;
   const cx = width / gx;
 
@@ -47,7 +47,7 @@ const { init, ellipse, print } = require("../src/art1");
         c: cx * j,
         nr: 2,
         nc: 2,
-        symbol: "\033[45m\033[39mo\u0361\033[0m"
+        symbol: "\033[45m\033[39m~\u0361\033[0m"
       });
     }
   }
