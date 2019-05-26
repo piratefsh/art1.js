@@ -6,7 +6,7 @@ const { init, ellipse, print } = require("../src/art1");
   const c = init({
     width,
     height,
-    symbol1: "\033[36m/\033[0m",
+    symbol1: "\033[30;46m/\033[0m",
     ncol: 1,
     symbol2: "",
     mcol: 1
@@ -32,10 +32,6 @@ const { init, ellipse, print } = require("../src/art1");
         symbol: "\033[33;7;1mX"
       });
 
-      // c.arr2 = ellipse(c.arr2, {
-      //   ...circleOpts,
-      //   symbol: ""
-      // });
       c.arr1 = ellipse(c.arr1, {
         ...circleOpts,
         nr: nr - 2,
@@ -51,23 +47,5 @@ const { init, ellipse, print } = require("../src/art1");
       });
     }
   }
-
-
-  // c.arr2 = ellipse(c.arr2, {
-  //   r: height / 2,
-  //   c: width / 2,
-  //   nr: 5,
-  //   nc: 5,
-  //   symbol: "\u0350"
-  // });
-
-  // c.arr1 = ellipse(c.arr1, {
-  //   r: height / 2,
-  //   c: width / 2,
-  //   nr: 5,
-  //   nc: 5,
-  //   symbol: "o"
-  // });
-
   console.log(print(c, " "));
 })();
