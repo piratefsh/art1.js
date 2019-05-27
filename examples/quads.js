@@ -68,6 +68,6 @@ function drawFrame(...options){
     mcol: 1
   });
 
-  drawFrame(canvas, width, height)
+  draw(canvas, width, height)
 
 })();

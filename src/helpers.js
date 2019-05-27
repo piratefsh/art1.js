@@ -5,7 +5,7 @@ function array(w = CANVAS_WIDTH, h = CANVAS_HEIGHT) {
 }
 
 function fill(arr, symbol, ncol) {
-  return arr.map(row => row.map((char, j) => (j % ncol === 0 ? symbol : " ")));
+  return arr.map(row => row.map((char, j) => (j % ncol === 0 ? symbol : "")));
 }
 
 function stringify(arr) {
