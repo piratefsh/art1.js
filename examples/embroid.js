@@ -24,13 +24,11 @@ function draw(canvas, width, height){
         nr: cy,
       };
       const { c, r, nc, nr} = opts;
-      canvas.arr1 = ellipse(canvas.arr1, { r: r+1, c: c + 3, nr: 1, nc: 0, symbol: blossom})
-      canvas.arr1 = ellipse(canvas.arr1, { r: r - 1 , c: c + 3, nr: 1, nc: 0, symbol: blossom})
       canvas.arr1 = ellipse(canvas.arr1, { r: r - 2, c: c - 2, nr: 0, nc: 0, symbol: '\033[0m🌿\033[0m'})
       canvas.arr1 = line(canvas.arr1, { ...opts, r: r , c: c + 3, nr: nr, nc: nc + 3, symbol: box})
       canvas.arr1 = line(canvas.arr1, {...opts, symbol: squiggle})
-      canvas.arr1 = ellipse(canvas.arr1, { r: r  , c: c + 2, nr: 1, nc: 0, symbol: blossom})
-      canvas.arr1 = ellipse(canvas.arr1, { r: r  , c: c + 4, nr: 1, nc: 0, symbol: blossom})
+      canvas.arr1 = ellipse(canvas.arr1, { r: r + 1, c: c + 4, nr: 1, nc: 1, symbol: blossom})
+      canvas.arr1 = ellipse(canvas.arr1, { r: r + 1, c: c + 4, nr: 0, nc: 0, symbol: box})
     }
   }
   console.clear();
