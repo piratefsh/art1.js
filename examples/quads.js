@@ -1,4 +1,4 @@
-const { init, triangle, quadrants, print } = require("../src/art1");
+const { init, triangle, print } = require("../src/art1");
 const { CANVAS_HEIGHT, CANVAS_WIDTH } = require("../src/constants");
 const { randInt } = require("../src/random");
 
@@ -36,29 +36,19 @@ const { randInt } = require("../src/random");
       canvas.arr2 = triangle(canvas.arr2, {
         ...circleOpts,
         c: c,
-        r: r + cy - 3 ,
+        r: r + cy - 4 ,
         nr: cy/2,
         symbol: "\033[1mV\033[0m"
       });
 
       canvas.arr2 = triangle(canvas.arr2, {
         ...circleOpts,
-        c: c - cx/2,
+        c: c,
         r: r + cy - 3,
         nr: - cy/2,
         symbol: "\033[1mV\033[0m"
       });
 
-  //     c.arr1 = ellipse(c.arr1, {
-  //       ...circleOpts,
-  //       r: r,
-  //       c: c,
-  //       nr: 2,
-  //       nc: 2,
-  //       symbol: "-"
-  //     });
-
-      canvas.arr1 = quadrants(canvas.arr1);
     }
   }
   console.log(print(canvas, " "));
