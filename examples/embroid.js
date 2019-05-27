@@ -52,7 +52,7 @@ function drawFrame(...options){
     height,
     symbol1: "\033[34m.\u0328\u0343\u1ddd\033[0m",
     ncol: 1,
-    symbol2: "\033[35;1m|\033[0m",
+    symbol2: "\033[35;1m\\\033[0m",
     mcol: 10
   });
 
