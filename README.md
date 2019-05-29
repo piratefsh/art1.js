@@ -2,7 +2,7 @@
 
 JavaScript implementation of the ART 1 language from the 1960s
 
-![screenshot of quads.js example](./examples/quads.png)
+![screenshot of quads.js example](https://raw.githubusercontent.com/piratefsh/art1.js/master/examples/quads.png)
 
 ## Run examples
 ```
