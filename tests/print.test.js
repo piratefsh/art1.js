@@ -1,4 +1,4 @@
-const print = require("../src/print");
+const { print, oprint } = require("../src/print");
 const setup = require("./util");
 const { ellipse, triangle, rect } = require("../src/art1");
 

@@ -16,4 +16,4 @@ function oprint(canvas, joiner="") {
   return (a1rows.map((row, index) => `${a1rows[index]}\r${a2rows[index]}`).join("\n"));
 }
 
-module.exports = {print, oprint};
+module.exports = { print, oprint };
