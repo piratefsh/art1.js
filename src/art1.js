@@ -119,7 +119,7 @@ function ellipse(arr, { symbol, r, c, nr, nc }) {
       const rx2 = nc * nc;
 
       // do integer math comparison
-      if (dx * rx2 + dy * ry2 <= ry2 * rx2) {
+      if (dx * ry2 + dy * rx2 <= ry2 * rx2) {
         setx(rarr, x, y, symbol);
       }
     }
@@ -193,5 +193,6 @@ module.exports = {
   quadrants,
   triangle,
   init,
-  print
+  print,
+  oprint
 };
