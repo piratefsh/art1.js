@@ -1,10 +1,12 @@
 const { init, rect, ellipse, oprint } = require("../src/art1");
 
+// after Frederick Hammersley "Jelly Centers" 1969
+
 (function main() {
   const gx = 3;
   const gy = 4;
   const cy = 12;  // height of each block
-  const cx = 24;  // slightly different than original because we're only 72 wide
+  const cx = 24;  // slightly different than original because we're only 72 wide in total
   const width = 72;
   const height = gy * cy;
 
@@ -13,7 +15,7 @@ const { init, rect, ellipse, oprint } = require("../src/art1");
     height,
     symbol1: "-",
     ncol: 1,
-    symbol2: ".",
+    symbol2: "'",
     mcol: 1
   });
 
@@ -24,21 +26,21 @@ const { init, rect, ellipse, oprint } = require("../src/art1");
         symbol: " ",
         r: cy * i,
         c: cx * j,
-        nr: 5,
-        nc: 10
+        nr: 6,
+        nc: 12
       });
 
       c.arr1 = ellipse(c.arr1, {
         symbol: "O",
         r: cy * i,
         c: cx * j,
-        nr: 3,
-        nc: 7
+        nr: 4,
+        nc: 8
       });
 
       if ((i + j) % 2 ==0 ) {
         c.arr2 = rect(c.arr2, {
-          symbol: "'",
+          symbol: ".",
           r: cy * i,
           c: cx * j,
           nr: cy,

@@ -115,11 +115,11 @@ function ellipse(arr, { symbol, r, c, nr, nc }) {
       // if point is in ellipse
       const dx = (x - c) * (x - c);
       const dy = (y - r) * (y - r);
-      const ry2 = nr * nr;
-      const rx2 = nc * nc;
+      const ry2 = (nr-0.5) * (nr-0.5);
+      const rx2 = (nc-0.5) * (nc-0.5);
 
       // do integer math comparison
-      if (dx * ry2 + dy * rx2 <= ry2 * rx2) {
+      if (dx * ry2 + dy * rx2 < ry2 * rx2) {
         setx(rarr, x, y, symbol);
       }
     }
