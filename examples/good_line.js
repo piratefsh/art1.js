@@ -5,8 +5,8 @@ const { init, rect, line, oprint } = require("../src/art1");
 (function main() {
   const width = 71;
   const height = 50;
-  const cx = width/2;
-  const cy = height/2;
+  const cx = width / 2;
+  const cy = height / 2;
 
   const c = init({
     width,
