@@ -1,11 +1,11 @@
 const { init, ellipse, oprint } = require("../src/art1");
 
-// after K.Nash "Spheroid" 1969
+// after K.Nash "Spheroids" 1969
 // for Teletype (72 character width)
 
 (function main() {
   const width = 72;
-  const height = 60;
+  const height = 49;
 
   const c = init({
     width,
@@ -13,7 +13,8 @@ const { init, ellipse, oprint } = require("../src/art1");
     symbol1: " ",
     ncol: 1,
     symbol2: " ",
-    mcol: 1
+    mcol: 1,
+    title: " ".repeat(30) + "SPHEROIDS"
   });
 
   c.arr1 = ellipse(c.arr1, {

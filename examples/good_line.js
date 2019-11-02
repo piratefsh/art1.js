@@ -14,7 +14,8 @@ const { init, rect, line, oprint } = require("../src/art1");
     symbol1: " ",
     ncol: 1,
     symbol2: " ",
-    mcol: 1
+    mcol: 1,
+    title: " ".repeat(22) + "A GOOD LINE IS HARD TO BEAT"
   });
 
   c.arr1 = rect(c.arr1, {symbol: "O", r: 0, c: 0, nr: cy, nc: cx });

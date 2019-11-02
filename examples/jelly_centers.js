@@ -16,7 +16,8 @@ const { init, rect, ellipse, oprint } = require("../src/art1");
     symbol1: "-",
     ncol: 1,
     symbol2: "'",
-    mcol: 1
+    mcol: 1,
+    title: " ".repeat(29) + "JELLY  CENTERS"
   });
 
   for (let i = 0; i < gy + 1; i += 1) {
