@@ -1,4 +1,4 @@
-const print = require("../src/print");
+const { print, oprint } = require("../src/print");
 const setup = require("./util");
 const { ellipse, triangle, rect } = require("../src/art1");
 
@@ -72,15 +72,15 @@ _ _ _ _ _ `
 
     expect(print(c)).toEqual(
       `.͝.͝.͝.͝.͝.͝.͝.͝.͝.͝.͝
-.͝.͝.͝.͝.͝o͝.͝.͝.͝.͝.͝
+.͝.͝.͝.͝.͝.͝.͝.͝.͝.͝.͝
+.͝.͝.͝.͝o͝o͝o͝.͝.͝.͝.͝
 .͝.͝.͝o͝o͝o͝o͝o͝.͝.͝.͝
-.͝.͝o͝o͝o͝*͡o͝o͝o͝.͝.͝
 .͝.͝o͝o͝*͡*͡*͡o͝o͝.͝.͝
-.͝o͝o͝*͡*͡*͡*͡*͡o͝o͝.͝
 .͝.͝o͝o͝*͡*͡*͡o͝o͝.͝.͝
-.͝.͝o͝o͝o͝*͡o͝o͝o͝.͝.͝
+.͝.͝o͝o͝*͡*͡*͡o͝o͝.͝.͝
 .͝.͝.͝o͝o͝o͝o͝o͝.͝.͝.͝
-.͝.͝.͝.͝.͝o͝.͝.͝.͝.͝.͝
+.͝.͝.͝.͝o͝o͝o͝.͝.͝.͝.͝
+.͝.͝.͝.͝.͝.͝.͝.͝.͝.͝.͝
 .͝.͝.͝.͝.͝.͝.͝.͝.͝.͝.͝`
     );
   });
